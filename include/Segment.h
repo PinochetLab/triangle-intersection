@@ -1,9 +1,10 @@
 #pragma once
 
+#include <ostream>
+
 #include "Vec3.h"
 
 class Segment {
-private:
 	bool intersects_line(const Segment& other) const {
 		Vec3 v0 = other.begin;
 		Vec3 d = other.end - other.begin;
