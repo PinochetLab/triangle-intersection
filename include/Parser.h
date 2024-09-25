@@ -17,7 +17,7 @@ public:
 	Parser(const std::string& filename) {
 		file.open(filename);
 		if (!file.is_open()) {
-			throw std::runtime_error("Не удается открыть файл: " + filename);
+			throw std::runtime_error("Unable to open file: " + filename);
 		}
 	}
 

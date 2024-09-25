@@ -6,18 +6,12 @@
 #include "Segment.h"
 
 class Triangle {
-public:
-	Vec3 v0, v1, v2;
-
-	Triangle(Vec3 v0, Vec3 v1, Vec3 v2) : v0(v0), v1(v1), v2(v2) {};
-
-	Triangle() : v0(), v1(), v2() {};
-
+private:
 	std::vector<Segment> get_segments() const {
 		return { {v0, v1}, {v1, v2}, {v2, v0} };
 	}
 
-	bool intersects_by_segment(const Segment& segment) const;
+	bool intersects_by_segment(const Segment& segment) const noexcept;
 
 	bool intersects_by_triangle_segments(const Triangle& other) const {
 		for (const auto& segment : other.get_segments()) {
@@ -27,14 +21,22 @@ public:
 		}
 		return false;
 	}
+public:
+	Vec3 v0, v1, v2;
 
-	static bool intersect(const Triangle& t1, const Triangle& t2) {
-		return t1.intersects_by_triangle_segments(t2) || t2.intersects_by_triangle_segments(t1);
+	Triangle(Vec3 v0, Vec3 v1, Vec3 v2) : v0(v0), v1(v1), v2(v2) {}
+
+	Triangle() : v0(), v1(), v2() {}
+
+	bool intersects(const Triangle& other) const {
+		return intersects_by_triangle_segments(other) || other.intersects_by_triangle_segments(*this);
 	}
 
 	friend std::istream& operator >> (std::istream& cin, Triangle &t)
 	{
-		cin >> t.v0 >> t.v1 >> t.v2;
+		if (!(cin >> t.v0 >> t.v1 >> t.v2)) {
+			cin.setstate(std::ios::failbit);
+		}
 		return cin;
 	}
 

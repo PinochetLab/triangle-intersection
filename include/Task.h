@@ -12,11 +12,11 @@ public:
 
 	Task() : t1(), t2(), expected_intersect(), line_number() {}
 
-	bool calculate_real_intersect() const {
-		return Triangle::intersect(t1, t2);
+	bool are_triangles_intersect() const {
+		return t1.intersects(t2);
 	}
 
-	bool get_expected_intersect() const {
+	bool get_expected() const {
 		return expected_intersect;
 	}
 
@@ -27,7 +27,13 @@ public:
 	friend std::istream& operator >> (std::istream& cin, Task& t)
 	{
 		std::string expected_str;
-		cin >> t.t1 >> t.t2 >> expected_str;
+		if (!(cin >> t.t1)) {
+			throw std::runtime_error("incorrect Triangle1 in line " + std::to_string(t.line_number));
+		}
+		if (!(cin >> t.t2)) {
+			throw std::runtime_error("incorrect Triangle2 in line " + std::to_string(t.line_number + 1));
+		}
+		cin >> expected_str;
 		if (expected_str == "true") {
 			t.expected_intersect = true;
 		}
@@ -35,7 +41,8 @@ public:
 			t.expected_intersect = false;
 		}
 		else {
-			throw std::domain_error("incorrect bool value");
+			std::cout << t.t1 << std::endl << t.t2 << std::endl;
+			throw std::domain_error("incorrect bool value: " + expected_str);
 		}
 		return cin;
 	}

@@ -4,14 +4,17 @@
 #include <stdexcept>
 #include <iostream>
 
-
+/**
+ * @class Vec3
+ * @brief Class for 3-dimensional vector.
+ */
 class Vec3 {
 private:
 	bool is_zero() const {
 		return x == 0 && y == 0 && z == 0;
 	}
 public:
-	double x, y, z;
+	double x, y, z; // Coordinate
 
 	Vec3(double x, double y, double z) : x(x), y(y), z(z) {}
 
@@ -75,7 +78,9 @@ public:
 
 	friend std::istream& operator >> (std::istream& cin, Vec3& v)
 	{
-		cin >> v.x >> v.y >> v.z;
+		if (!(cin >> v.x >> v.y >> v.z)) {
+			cin.setstate(std::ios::failbit);
+		}
 		return cin;
 	}
 
