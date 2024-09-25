@@ -28,10 +28,10 @@ public:
 	{
 		std::string expected_str;
 		if (!(cin >> t.t1)) {
-			throw std::runtime_error("incorrect Triangle1 in line " + std::to_string(t.line_number));
+			throw std::runtime_error("incorrect Triangle1 in line " + std::to_string(t.line_number - 2));
 		}
 		if (!(cin >> t.t2)) {
-			throw std::runtime_error("incorrect Triangle2 in line " + std::to_string(t.line_number + 1));
+			throw std::runtime_error("incorrect Triangle2 in line " + std::to_string(t.line_number - 1));
 		}
 		cin >> expected_str;
 		if (expected_str == "true") {
@@ -41,7 +41,6 @@ public:
 			t.expected_intersect = false;
 		}
 		else {
-			std::cout << t.t1 << std::endl << t.t2 << std::endl;
 			throw std::domain_error("incorrect bool value: " + expected_str);
 		}
 		return cin;

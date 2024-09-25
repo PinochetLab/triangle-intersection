@@ -2,10 +2,10 @@
 
 void Parser::parse(std::queue<Task>& task_queue, std::mutex& mtx, std::condition_variable& cv) {
 	std::string line;
-	int line_number = 0;
+	int line_number = 1;
 	while (std::getline(file, line)) {
-		line_number++;
 		if (line.empty() || line[0] == '#') {
+			line_number++;
 			continue;
 		}
 		else {
