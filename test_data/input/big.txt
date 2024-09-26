@@ -1,0 +1,269 @@
+# points, equal
+0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0
+true
+
+# points, not equal
+0 0 0 0 0 0 0 0 0
+1 1 1 1 1 1 1 1 1
+false
+
+# point and segment (not in one plane)
+0 0 0 0 0 0 0 0 0
+0 0 1 0 0 1 0 1 1
+false
+
+# point and segment (one plane, no on line)
+0 0 0 0 0 0 0 0 0
+1 0 0 1 0 0 1 1 0
+false
+
+# point and segment (one plane, on line, no intersection)
+0 0 0 0 0 0 0 0 0
+0 1 0 0 1 0 0 2 0
+false
+
+# point and segment (point is on segment)
+0 0 0 0 0 0 0 0 0
+0 -1 0 0 -1 0 0 1 0
+true
+
+# point and segment (point is segment end)
+0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 1 0
+true
+
+# reverse first and second
+0 0 1 0 0 1 0 1 1
+0 0 0 0 0 0 0 0 0
+false
+1 0 0 1 0 0 1 1 0
+0 0 0 0 0 0 0 0 0
+false
+0 1 0 0 1 0 0 2 0
+0 0 0 0 0 0 0 0 0
+false
+0 -1 0 0 -1 0 0 1 0
+0 0 0 0 0 0 0 0 0
+true
+0 0 0 0 0 0 0 1 0
+0 0 0 0 0 0 0 0 0
+true
+
+# point and triangle (not one plane)
+0 0 0 2 0 0 0 2 0
+0 0 1 0 0 1 0 0 1
+false
+
+# point and triangle (one plane, not in triangle, not on lines)
+0 0 0 2 0 0 0 2 0
+3 3 0 3 3 0 3 3 0
+false
+
+# point and triangle (one plane, not in triangle, on lines)
+0 0 0 2 0 0 0 2 0
+0 3 0 0 3 0 0 3 0
+false
+
+# point and triangle (one plane, in triangle)
+0 0 0 2 0 0 0 2 0
+1 1 0 1 1 0 1 1 0
+true
+
+# point and triangle (one plane, on triangle segments)
+0 0 0 2 0 0 0 2 0
+0 1 0 0 1 0 0 1 0
+true
+
+# point and triangle (one plane, point is triangle vertex)
+0 0 0 2 0 0 0 2 0
+0 0 0 0 0 0 0 0 0
+true
+
+# reverse first and second
+0 0 1 0 0 1 0 0 1
+0 0 0 2 0 0 0 2 0
+false
+3 3 0 3 3 0 3 3 0
+0 0 0 2 0 0 0 2 0
+false
+0 3 0 0 3 0 0 3 0
+0 0 0 2 0 0 0 2 0
+false
+1 1 0 1 1 0 1 1 0
+0 0 0 2 0 0 0 2 0
+true
+0 1 0 0 1 0 0 1 0
+0 0 0 2 0 0 0 2 0
+true
+0 0 0 0 0 0 0 0 0
+0 0 0 2 0 0 0 2 0
+true
+
+# segment and triangle (not one plane, segment is not parallel, no intersection even on line)
+0 0 0 3 0 0 0 3 0
+0 0 1 0 0 1 0 1 2
+false
+
+# segment and triangle (not one plane, segment is not parallel, no intersection - only if continue)
+0 0 0 3 0 0 0 3 0
+1 1 1 1 1 1 1 1 2
+false
+
+# segment and triangle (not one plane, segment is not parallel, intersection)
+0 0 0 3 0 0 0 3 0
+1 1 1 1 1 1 1 1 -1
+true
+
+# segment and triangle (not one plane, segment is not parallel, touches)
+0 0 0 3 0 0 0 3 0
+1 1 1 1 1 1 1 1 0
+true
+
+# segment and triangle (not one plane, segment is parallel)
+0 0 0 3 0 0 0 3 0
+0 0 1 0 0 1 1 0 1
+false
+
+# segment and triangle (one plane, no intersection)
+0 0 0 3 0 0 0 3 0
+-1 0 0 -1 0 0 -1 1 0
+false
+
+# segment and triangle (one plane, touches vertex)
+0 0 0 3 0 0 0 3 0
+-1 0 0 -1 0 0 0 0 0
+true
+
+# segment and triangle (one plane, touches segment)
+0 0 0 3 0 0 0 3 0
+-1 1 0 -1 1 0 0 1 0
+true
+
+# segment and triangle (one plane, intersects segment)
+0 0 0 3 0 0 0 3 0
+-1 1 0 -1 1 0 1 1 0
+true
+
+# segment and triangle (one plane, through 2 segments)
+0 0 0 3 0 0 0 3 0
+-1 1 0 -1 1 0 5 1 0
+true
+
+# segment and triangle (one plane, through vertex)
+0 0 0 3 0 0 0 3 0
+-1 1 0 -1 1 0 1 -1 0
+true
+
+# segment and triangle (segment inside)
+0 0 0 3 0 0 0 3 0
+1 1 0 1 1 0 1 2 0
+true
+
+# reverse first and second
+0 0 1 0 0 1 0 1 2
+0 0 0 3 0 0 0 3 0
+false
+1 1 1 1 1 1 1 1 2
+0 0 0 3 0 0 0 3 0
+false
+1 1 1 1 1 1 1 1 -1
+0 0 0 3 0 0 0 3 0
+true
+1 1 1 1 1 1 1 1 0
+0 0 0 3 0 0 0 3 0
+true
+0 0 1 0 0 1 1 0 1
+0 0 0 3 0 0 0 3 0
+false
+-1 0 0 -1 0 0 -1 1 0
+0 0 0 3 0 0 0 3 0
+false
+-1 0 0 -1 0 0 0 0 0
+0 0 0 3 0 0 0 3 0
+true
+-1 1 0 -1 1 0 0 1 0
+0 0 0 3 0 0 0 3 0
+true
+-1 1 0 -1 1 0 1 1 0
+0 0 0 3 0 0 0 3 0
+true
+-1 1 0 -1 1 0 5 1 0
+0 0 0 3 0 0 0 3 0
+true
+-1 1 0 -1 1 0 1 -1 0
+0 0 0 3 0 0 0 3 0
+true
+1 1 0 1 1 0 1 2 0
+0 0 0 3 0 0 0 3 0
+true
+
+# triangles (not one plane, not parallel)
+0 0 0 1 0 0 0 1 0
+0 0 1 0 1 1 0 0 2
+false
+
+# triangles (not one plane, not parallel, common vertex)
+0 0 0 1 0 0 0 1 0
+0 0 1 0 1 1 0 0 0
+true
+
+# triangles (not one plane, not parallel, common segment)
+0 0 0 1 0 0 0 1 0
+0 0 1 0 0 0 1 0 0
+true
+
+# triangles (not one plane, not parallel, t1 vertex in t2 segment)
+0 0 0 3 0 0 0 3 0
+0 0 1 0 1 1 1 1 0
+true
+
+# triangles (not one plane, not parallel, t1 vertex in t2)
+0 0 0 3 0 0 0 3 0
+0 0 1 0 1 1 0 1 0
+true
+
+# triangles (not one plane, not parallel, t1 through t2)
+0 0 0 3 0 0 0 3 0
+-1 1 1 1 1 1 0 1 -5
+true
+
+# triangles (one plane, no intersection)
+0 0 0 3 0 0 0 3 0
+-2 -2 0 -2 -1 0 -1 -1 0
+false
+
+# triangles (one plane, common vertices)
+0 0 0 1 0 0 0 1 0
+0 0 0 -1 0 0 0 -1 0
+true
+
+# triangles (one plane, common segments)
+0 0 0 1 0 0 0 1 0
+0 0 0 1 0 0 0 -1 0
+true
+
+# triangles (one plane, touches segment)
+0 0 0 2 0 0 0 2 0
+1 0 0 1 -1 0 2 -1 0
+true
+
+# triangles (one plane, one point inside)
+0 0 0 3 0 0 0 3 0
+1 -1 0 1 1 0 2 -1 0
+true
+
+# triangles (one plane, t1 through t2)
+0 0 0 3 0 0 0 3 0
+1 -1 0 1 5 0 2 -1 0
+true
+
+# triangles (one plane, t1 in t2)
+0 0 0 3 0 0 0 3 0
+1 1 0 2 1 0 1 2 0
+true
+
+# triangles (one plane, t2 in t1)
+1 1 0 2 1 0 1 2 0
+0 0 0 3 0 0 0 3 0
+true

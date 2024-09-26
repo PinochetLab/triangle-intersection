@@ -11,4 +11,19 @@ file(GLOB SOURCES
     "src/*.cpp"
 )
 
+add_library(TriangleLib STATIC ${SOURCES})
+
 add_executable(TriangleIntersection ${SOURCES})
+
+enable_testing()
+
+file(GLOB TEST_SOURCES
+    "tests/*.cpp"
+)
+
+add_executable(TriangleIntersectionTests ${TEST_SOURCES})
+
+target_link_libraries(TriangleIntersectionTests TriangleLib)
+
+enable_testing()
+add_test(NAME TriangleTests COMMAND TriangleIntersectionTests)

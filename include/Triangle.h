@@ -13,14 +13,13 @@ class Triangle {
 
 	bool intersects_by_segment(const Segment& segment) const;
 
-	bool intersects_by_triangle_segments(const Triangle& other) const {
-		for (const auto& segment : other.get_segments()) {
-			if (intersects_by_segment(segment)) {
-				return true;
-			}
-		}
-		return false;
-	}
+	bool intersects_by_triangle_segments(const Triangle& other) const;
+
+	bool is_point_inside(Vec3 point) const;
+
+	bool is_degenerative_point(Vec3& point) const;
+
+	bool is_degenerative_segment(Segment& segment) const;
 public:
 	Vec3 v0, v1, v2;
 
@@ -28,9 +27,7 @@ public:
 
 	Triangle() = default;
 
-	bool intersects(const Triangle& other) const {
-		return intersects_by_triangle_segments(other) || other.intersects_by_triangle_segments(*this);
-	}
+	bool intersects(const Triangle& other) const;
 
 	friend std::istream& operator >> (std::istream& cin, Triangle &t)
 	{

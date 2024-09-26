@@ -5,41 +5,47 @@
 #include <iostream>
 
 /**
- * @class Vec3Base
+ * @class Vec3
  * @brief Class for 3-dimensional vector.
  */
-template<class T>
-class Vec3Base {
-	static_assert(std::is_arithmetic<T>::value);
+class Vec3 {
 	bool is_zero() const {
-		return x == T() && y == T() && z == T();
+		return x == float_t() && y == float_t() && z == float_t();
 	}
 public:
-	using type = T;
+	using float_t = long double;
 
-	T x, y, z; // Coordinate
+	float_t x, y, z;
 
-	Vec3Base(T x, T y, T z) : x(x), y(y), z(z) {}
+	Vec3(float_t x, float_t y, float_t z) : x(x), y(y), z(z) {}
 
-	Vec3Base() : x(), y(), z() {}
+	Vec3() : x(), y(), z() {}
 
-	T length() const {
+	float_t length() const {
 		return std::sqrt(x * x + y * y + z * z);
 	}
 
-	static T distance(const Vec3Base& v1, const Vec3Base& v2) {
+	static float_t distance(const Vec3& v1, const Vec3& v2) {
 		return (v2 - v1).length();
 	}
 
-	static T dot(const Vec3Base& v1, const Vec3Base& v2) {
+	static float_t dot(const Vec3& v1, const Vec3& v2) {
 		return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
 	}
 
-	static Vec3Base cross(const Vec3Base& v1, const Vec3Base& v2) {
-		return Vec3Base(v1.y * v2.z - v1.z * v2.y, v1.z * v2.x - v1.x * v2.z, v1.x * v2.y - v1.y * v2.x);
+	static Vec3 cross(const Vec3& v1, const Vec3& v2) {
+		return Vec3(v1.y * v2.z - v1.z * v2.y, v1.z * v2.x - v1.x * v2.z, v1.x * v2.y - v1.y * v2.x);
 	}
 
-	Vec3Base get_normalized() const {
+	static bool are_perpendicular(const Vec3& v1, const Vec3& v2) {
+		return Vec3::dot(v1, v2) == 0;
+	}
+
+	static float_t area(const Vec3& v1, const Vec3& v2, const Vec3& v3) {
+		return cross(v2 - v1, v3 - v1).length() / 2;
+	}
+
+	Vec3 get_normalized() const {
 		if (is_zero()) {
 			return *this;
 		}
@@ -50,51 +56,55 @@ public:
 		if (is_zero()) {
 			return;
 		}
-		T len = length();
+		float_t len = length();
 		x /= len;
 		y /= len;
 		z /= len;
 	}
 
-	Vec3Base& operator += (const Vec3Base& other) {
+	bool operator == (const Vec3& other) const {
+		return x == other.x && y == other.y && z == other.z;
+	}
+
+	Vec3& operator += (const Vec3& other) {
 		x += other.x;
 		y += other.y;
 		z += other.z;
 		return *this;
 	}
 
-	Vec3Base operator + (const Vec3Base& other) const {
-		return Vec3Base(*this) += other;
+	Vec3 operator + (const Vec3& other) const {
+		return Vec3(*this) += other;
 	}
 
-	Vec3Base& operator -= (const Vec3Base& other) {
+	Vec3& operator -= (const Vec3& other) {
 		x -= other.x;
 		y -= other.y;
 		z -= other.z;
 		return *this;
 	}
 
-	Vec3Base operator - (const Vec3Base& other) const {
-		return Vec3Base(*this) -= other;
+	Vec3 operator - (const Vec3& other) const {
+		return Vec3(*this) -= other;
 	}
 
-	Vec3Base operator - () const {
-		return Vec3Base(-x, -y, -z);
+	Vec3 operator - () const {
+		return Vec3(-x, -y, -z);
 	}
 
-	Vec3Base& operator *= (T a) {
+	Vec3& operator *= (float_t a) {
 		x *= a;
 		y *= a;
 		z *= a;
 		return *this;
 	}
 
-	Vec3Base operator * (T a) const {
-		return Vec3Base(*this) *= a;
+	Vec3 operator * (float_t a) const {
+		return Vec3(*this) *= a;
 	}
 
-	Vec3Base& operator /= (T a) {
-		if (a == T()) {
+	Vec3& operator /= (float_t a) {
+		if (a == float_t()) {
 			throw std::invalid_argument("division by zero");
 		}
 		x /= a;
@@ -103,21 +113,19 @@ public:
 		return *this;
 	}
 
-	Vec3Base operator / (T a) const {
-		return Vec3Base(*this) /= a;
+	Vec3 operator / (float_t a) const {
+		return Vec3(*this) /= a;
 	}
 
-	friend std::istream& operator >> (std::istream& cin, Vec3Base& v)
+	friend std::istream& operator >> (std::istream& cin, Vec3& v)
 	{
 		cin >> v.x >> v.y >> v.z;
 		return cin;
 	}
 
-	friend std::ostream& operator << (std::ostream& cout, const Vec3Base& v)
+	friend std::ostream& operator << (std::ostream& cout, const Vec3& v)
 	{
 		cout << "(" << v.x << ", " << v.y << ", " << v.z << ")";
 		return cout;
 	}
 };
-
-using Vec3 = Vec3Base<long double>;

@@ -15,6 +15,5 @@ class TaskSolver {
     std::condition_variable cv;
 public:
 	Answer solve_file(const std::string& path);
-
     Answer solve_vector(const std::vector<Task>& tasks);
 };
