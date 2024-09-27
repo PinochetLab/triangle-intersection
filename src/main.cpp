@@ -8,16 +8,24 @@
 
 int main(int argc, char *argv[])
 {
-    if (argc <= 1) {
-        std::cerr << "path is not passed" << std::endl;
+    // Check if no argumnet.
+    if (argc <= 1)
+    {
+        std::cerr << "file path is not passed" << std::endl;
         return 1;
     }
     std::string path(argv[1]);
     TaskSolver task_solver;
-    try {
+    // Try solve tasks and catch errors.
+    try
+    {
         Answer answer = task_solver.solve_file(path);
+        // Print answer.
         std::cout << answer << std::endl;
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception &e)
+    {
+        // Print error.
         std::cerr << e.what() << std::endl;
         return 1;
     }
